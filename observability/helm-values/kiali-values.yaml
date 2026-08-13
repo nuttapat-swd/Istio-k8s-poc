@@ -1,0 +1,22 @@
+# Kiali for local Istio POC.
+auth:
+  strategy: anonymous
+
+deployment:
+  cluster_wide_access: true
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      memory: 1Gi
+  service_type: ClusterIP
+
+external_services:
+  prometheus:
+    enabled: true
+    url: http://prometheus-server.istio-system.svc.cluster.local
+  grafana:
+    enabled: true
+    internal_url: http://grafana.istio-system.svc.cluster.local
+    external_url: http://localhost:3000
