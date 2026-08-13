@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: echo
+  namespace: istio-poc
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - echo-gateway
+  http:
+    - route:
+        - destination:
+            host: echo.istio-poc.svc.cluster.local
+            subset: v1
+            port:
+              number: 80
+          weight: 80
+        - destination:
+            host: echo.istio-poc.svc.cluster.local
+            subset: v2
+            port:
+              number: 80
+          weight: 20
